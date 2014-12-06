@@ -1,3 +1,13 @@
 <h3>User</h3>
 <p>Name: <%= @user.name if @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
+<p>Balance: <%= @user.balance if @user.balance %>Hr</p>
+
+<h3>Transfer Money</h3>
+<%= form_for(:transfer, url: transfers_path, method: 'post') do |f| %>
+    <%= f.label(:user_id, 'To') %>
+    <%= f.select(:user_id, User.all.collect { |u| [u.email, u.id] }) %>
+    <%= f.label(:amount, 'Amount') %>
+    <%= f.text_field :amount %>
+    <%= f.submit('Transfer', class: 'button') %>
+<% end %>
