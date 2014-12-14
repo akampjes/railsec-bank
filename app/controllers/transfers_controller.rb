@@ -3,7 +3,7 @@ class TransfersController < ApplicationController
     to_user = User.find(params[:transfer][:user_id])
     to_user.balance += params[:transfer][:amount].to_i
 
-    if params[:transfer][:amount].to_i <= session[:balance] && to_user.save
+    if params[:transfer][:amount].to_i > 0 && params[:transfer][:amount].to_i <= session[:balance] && to_user.save
       session[:balance] -= params[:transfer][:amount].to_i
       current_user.update(balance: session[:balance])
 
